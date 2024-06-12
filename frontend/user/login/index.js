@@ -9,7 +9,7 @@ let loginNav;
 
 //============ FUNCTION CALLED ===========
 
-
+handleLogoutBtn();
 //=========== EVENT LISTENERS ============
 // Add event listeners to inputs for validation
 email.addEventListener('focusout', () => validateInput(email));
@@ -34,30 +34,27 @@ loginBtn.addEventListener('click',()=>{
     }
 })
 
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(()=>{
-        let logoutBtn = document.querySelector('#logout');
-        if(logoutBtn){
-            logoutBtn.addEventListener('click',()=>{
-                logout(localStorage);
-                logoutBtn.id='login'
-                logoutBtn.innerHTML='Login'
-            })
-        }
-    },200)
-    setTimeout(()=>{
-        let loginBtn = document.querySelector('#login');
-        if(loginBtn){
-            loginBtn.addEventListener('click',()=>{
-                window.location.href = './index.js'; 
-            })
-        }
-    },200)
-});
+
+
 
 
 
 // ========= FUNCTIONS ================
+// CREATE EVENT LISTENER FOR LOGOUT
+function handleLogoutBtn(){
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(()=>{
+            let logoutBtn = document.querySelector('#logout');
+            if(logoutBtn){
+                logoutBtn.addEventListener('click',()=>{
+                    logout(localStorage);
+                    logoutBtn.id='login'
+                    logoutBtn.innerHTML='Login'
+                })
+            }
+        },200)
+    });
+}
 
 // LOAD THE NAVBAR USING JS
 function loadHTML(selector, file){
@@ -106,6 +103,7 @@ function login(data, email_value){
         resetInput(password)
         loginNav.id='logout'
         loginNav.innerHTML = 'Logout'
+        window.location.href = './index.html'; 
         return data;
     })
     .catch((e)=>{console.log('error', e)});

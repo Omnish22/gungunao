@@ -14,12 +14,9 @@ class RegisterView(APIView):
     
     def post(self, request):
         serializer = UserSerializer(data=request.data)
-        try:
-            serializer.is_valid(raise_exception=True)
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        except ValidationError as e:
-            return Response({'Error': 'Validation Error', 'Message':f'{e}'}, status=status.HTTP_409_CONFLICT)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
         
 class LoginView(APIView):
     def post(self, request):
@@ -29,11 +26,10 @@ class LoginView(APIView):
         if not user:
             return Response({'Login':'Failed'}, status=status.HTTP_401_UNAUTHORIZED)
         tokens = get_tokens_for_user(user)
-        print('Tokens ',tokens)
         return Response(tokens, status=status.HTTP_202_ACCEPTED)
     
 class LogoutView(APIView):
-    # permission_classes = (IsAuthenticated,)  # Uncomment this if you want to re-enable the permission
+    permission_classes = (IsAuthenticated,)  # Uncomment this if you want to re-enable the permission
 
     def post(self, request):
         refresh_token = request.data.get("refresh")

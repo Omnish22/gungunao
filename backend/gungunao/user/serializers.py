@@ -11,12 +11,8 @@ class UserSerializer(ModelSerializer):
     def create(self, validated_data):
         email = validated_data.get('email')
         password = validated_data.get('password')
-        confirm_password = validated_data.get('confirmPassword')
-
-        if not email or not password or not confirm_password:
+        if not email or not password:
             raise ValidationError({'detail': 'Email and Password are required.'})
-        if password!=confirm_password:
-            raise ValidationError({'detail': 'Confirm Password is not same as Password'})
         user = User(
             email=email
         )

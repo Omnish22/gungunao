@@ -26,6 +26,8 @@ signup.addEventListener('click',()=>{
         }
     else{
         postData(data);
+        window.location.href = '../login/index.html'; 
+
     }
 })
 
@@ -104,8 +106,8 @@ function validateInput(input){
     } else {
         if(input.classList.contains('pass2'))
         {
-            pass1 = password.value 
-            pass2 = input.value
+            let pass1 = password.value 
+            let pass2 = input.value
             if(pass1!=pass2)
             {
                 input = input.parentElement;

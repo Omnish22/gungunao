@@ -1,0 +1,84 @@
+
+
+#body{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* user */
+#user{
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Registration Form */
+#card{
+    background: #fafafa;
+    width: 30%;
+    height: 45vh;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 100px;
+    box-shadow: 0 0px 20px rgba(0, 0, 0, 0.3); /* Add a shadow on hover */
+
+}
+
+#card .input-div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 25px;
+    background: #efeeee;
+
+}
+.input-div input{
+    flex: 1;
+    background: transparent;
+    border: none;
+    font-size: 15px;
+    outline: none;
+    margin-left: 15px;
+    padding: 5px;
+}
+.input-error{
+    border: 2px solid red;
+}
+.input-valid{
+    border: 2px solid green;
+}
+
+#card p{
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+
+/* login signup */
+.btn-div{
+    display: flex;
+    justify-content: center;
+}
+.btn-div span{
+    background-color: #ff6f61; /* Coral */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+
+}
+.btn-div span:hover {
+    background-color: #ff9478; /* Lighter Coral for hover effect */
+    transform: scale(1.05); /* Slightly increase size on hover */
+}

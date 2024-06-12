@@ -137,3 +137,6 @@ REST_FRAMEWORK = {
 }
 
 CORS_ORIGIN_ALLOW_ALL = True  # Allow all origins (for development purposes)
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5501",
+]

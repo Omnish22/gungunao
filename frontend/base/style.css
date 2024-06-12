@@ -55,3 +55,9 @@ nav {
 #username{
     display: none;
 }
+
+.btn{
+    cursor: pointer;
+    color: #fff;
+    font-weight: 600;
+}

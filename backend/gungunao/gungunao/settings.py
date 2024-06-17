@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
+    'songs',
 ]
 
 MIDDLEWARE = [
@@ -140,3 +141,6 @@ CORS_ORIGIN_ALLOW_ALL = True  # Allow all origins (for development purposes)
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5501",
 ]
+
+MEDIA_URL = '/media/' # domain/media/filename
+MEDIA_ROOT = BASE_DIR / 'media' # where uploaded files will be saved

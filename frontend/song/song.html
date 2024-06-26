@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../base/style.css">
+    <link rel="stylesheet" href="song.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+</head>
+<body>
+    <div id="navbar"></div>
+    <div id="body">
+        <div id="card">
+            <div class="top">
+                <div class="circle">
+                    <img src="images/back.svg" alt="Icon">
+                </div>
+                <div class="top">
+                    <div class="circle">
+                        <img src="images/menu.png" alt="Icon">
+                    </div>
+            </div>
+        </div>
+        <div class="thumbnail">
+            
+        </div>
+        <div class="metadata">
+            <p class="songName">Song Name</p>
+            <p class="artistName">Artist Name</p>
+        </div>
+        <div id="audio-div">
+        </div>
+        <div>
+            <input class="slider" min="0" value="0" type="range">
+            <div class="timer">
+                <p class="currentTime">0:00</p>
+                <p class="durationTime">0:00</p>
+            </div>
+        </div>
+        <div class="controller">
+            <div id="homeId" class="circle home"><img src="images/backward-solid.svg" alt=""></div>
+            <div class="circle playpause"><img src="images/play-solid.svg" alt=""></div>
+            <div class="circle"><img src="images/forward-solid.svg" alt=""></div>
+        </div>
+    </div>
+</body>
+<script type="module" src="song.js"></script>
+</html>

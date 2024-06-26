@@ -1,0 +1,135 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'poppins', sans-serif;
+}
+
+#body{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+#card{
+    position: absolute;
+    top: 120px;
+    width: 25%;
+    background: #fa80bd;
+    border-radius: 8px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 20px #a20b56;
+
+}
+
+#card .top{
+    display: flex;
+    justify-content: space-between;
+}
+
+.circle{
+    border-radius: 50%;
+    background: #fff;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 3px 8px #820744;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.circle img{
+    width: 25px;
+    height: 25px;
+    background: #fff;
+    cursor: pointer;
+}
+
+.circle:hover{
+    transform: scale(1.2);
+}
+
+/* ===== THUMBNAIL IMAGE ======= */
+.thumbnail img{
+    width: 200px;
+    height: 200px;
+    margin-top: 5%;
+    border-radius: 50%;
+    border: 8px solid #fff;
+}
+
+.metadata{
+    margin-top: 2%;
+}
+
+.metadata p{
+    /* margin-top: 5%; */
+}
+
+.songName{
+    font-size: x-large;
+    font-weight: 500;
+    margin-top: 20px;
+}
+.artistName{
+    font-size: small;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+
+/* ===== LOWER ======= */
+audio {
+    display: none;
+}
+/* SLIDER */
+.slider{
+    -webkit-appearance: none;
+    height: 8px;
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: #fa80bd;
+    width: 20px;
+    height: 20px;
+    border: 4px solid #fff;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+  }
+
+.slider:hover::-webkit-slider-thumb {
+    transform: scale(1.5);
+}
+
+.timer{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 2px;
+}
+
+
+/* CONTROLLER */
+.controller{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.controller .circle{
+    width: 70px;
+    height: 70px;
+}
+
+.controller .playpause{
+    width: 90px;
+    height: 90px;
+}

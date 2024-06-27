@@ -28,7 +28,7 @@ a{
 }
 
 nav {
-    padding: 20px; /* Add padding to separate nav content from the edges */
+    padding: 5px 20px; /* Add padding to separate nav content from the edges */
     display: flex;
     justify-content: space-between;
     align-items: center;

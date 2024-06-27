@@ -17,4 +17,6 @@ def file_iterator(file_path, chunk_size=8192):
             if not chunk:
                 break
             chunk_count += 1
+            # if chunk_count%100==0:
+                # time.sleep(0.2)
             yield chunk

@@ -1,5 +1,6 @@
 import loadHTML from "../base/loadhtml.js";
 
+
 let thumbnail = document.querySelector('.thumbnail') 
 let songID; 
 let slider = document.querySelector('.slider') 
@@ -11,21 +12,44 @@ let play = false; // 1 MEANS SONG IS PLAYING AND 0 MEANS SONG IS PAUSED
 let intervelID; 
 let currentTimeElem = document.querySelector('.currentTime') 
 let durationTime = document.querySelector('.durationTime')
+let backPage = document.querySelector('.back')
+let playPrevBtn = document.querySelector('#previous-song')
+let playNextBtn = document.querySelector('#next-song')
+
 // ============ EVENT LISTENERS ================
 
 document.addEventListener('DOMContentLoaded', () => {
     loadHTML('#navbar', '../base/navbar.html');
     });
 
+backPage.addEventListener('click',()=>{
+    window.location.href = "/home/home.html";
+})
+
+// playNextBtn.addEventListener('click', ()=>{
+//     let nextSongId = localStorage.getItem('nextSong')
+//     console.log('next song')
+//     console.log(nextSongId)
+//     let song = localStorage.getItem(nextSongId)
+//     localStorage.setItem('song', JSON.stringify(song))
+//     window.location.href = `/song/song.html?${nextSongId}`
+// })
+// playPrevBtn.addEventListener('click', ()=>{
+//     window.location.href = `/song/song.html?${localStorage.getItem('prevSong')}`
+// })
+
 playpause.addEventListener('click',()=>{ 
     console.log(play)
-    updatePlayPauseIcon(play); 
+    // updatePlayPauseIcon(play); 
     if(!play){ 
         playSong(); 
     } 
     else{ 
         pauseSong() 
-    } 
+    }
+    if (intervelID){
+        disconnectSliderAudio(intervelID)
+    }
     intervelID = connectSliderAudio();
 
 })
@@ -33,6 +57,7 @@ playpause.addEventListener('click',()=>{
 
 slider.addEventListener('mousedown',()=>{ 
     disconnectSliderAudio(intervelID);
+    console.log('mousedown ', play)
 
 })
 
@@ -40,7 +65,10 @@ slider.addEventListener('mouseup',()=>{
     let audio = document.querySelector('audio'); 
     audio.currentTime = slider.value 
     intervelID = connectSliderAudio(); 
+    console.log('mouseup before play ',play)
+    play=false
     playSong(); 
+    console.log('mouseup after play',play)
 })
 
 
@@ -111,20 +139,23 @@ function connectSliderAudio(currentTime){
     let audio = document.querySelector('audio'); 
     let intervelID = setInterval(()=>{ 
         updateSliderValue(audio.currentTime) 
-        updateTime(currentTimeElem, formatTime(audio.currentTime)) 
+        updateTime(currentTimeElem, formatTime(audio.currentTime))
     },100) 
+    console.log('----> slider is connected now')
     return intervelID 
 }
 
 function disconnectSliderAudio(intervelID){
 
     clearInterval(intervelID);
+    console.log('-----> slider is free now')
 }
 
 function playSong(){ 
     let audio = document.querySelector('audio'); 
     console.log(audio)
     audio.play(); 
+    updatePlayPauseIcon(play);
     play=true; 
 }
 
@@ -133,22 +164,11 @@ function playSong(){
 function pauseSong(){ 
     let audio = document.querySelector('audio'); 
     audio.pause(); 
+    updatePlayPauseIcon(play)
     play=false; 
 }
 
-function backToHome(home){ 
-    
-    if (home) {
-        console.log('inside if')
-        console.log(home)
-        home.addEventListener('click', () => {
-            console.log('inside event listener')
-            window.location.href = '../home/home.html';
-        });
-    } else {
-        console.error('Home element not found');
-    }
-}
+
 
 function updateTime(element, time){ 
     if(element){ 

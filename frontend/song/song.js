@@ -16,6 +16,8 @@ let backPage = document.querySelector('.back')
 let playPrevBtn = document.querySelector('#previous-song')
 let playNextBtn = document.querySelector('#next-song')
 
+
+loginLogoutClicked();
 // ============ EVENT LISTENERS ================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -100,7 +102,11 @@ function createThumbnail(imgSrc){
 }
 
 function fetchAndPlaySong(songID) {
-    fetch(`http://127.0.0.1:8000/songs/play/${songID}/`) 
+    fetch(`http://127.0.0.1:8000/songs/play/${songID}/`,{
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    }) 
     .then(response => response.blob()) 
     .then(blob => { 
         let audioDiv = document.querySelector('#audio-div') 
@@ -185,3 +191,22 @@ function formatTime(seconds) {
     return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
  }
 
+
+ function loginLogoutClicked() {
+    document.addEventListener('click', (event) => {
+        
+        // Check if the clicked element or its parent is the logout button
+        if (event.target.id === 'login' || event.target.closest('#login') ) {
+            setTimeout(() => {
+                window.location.href='/user/login/index.html'
+            }, 100);
+        }
+        if(event.target.id === 'logout' || event.target.closest('#logout'))
+        {
+            setTimeout(() => {
+                localStorage.clear()
+                window.location.href='/user/login/index.html'
+            }, 100); 
+        }
+    });
+}

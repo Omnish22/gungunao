@@ -9,8 +9,10 @@ from django.http import StreamingHttpResponse
 import base64
 import time
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import IsAuthenticated
 
 class SongsView(APIView, PageNumberPagination):
+    permission_classes = [IsAuthenticated]
     def get(self, request):
         ''' This will give all songs with pagination '''
         songs = Songs.objects.all()
@@ -21,6 +23,7 @@ class SongsView(APIView, PageNumberPagination):
     
     
 class PlayView(APIView):
+    permission_classes = [IsAuthenticated]
     def get(self, request, song_id):
         song = Songs.objects.filter(id=song_id).first()
         try:

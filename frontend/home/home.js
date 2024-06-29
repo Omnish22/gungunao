@@ -2,6 +2,8 @@ import loadHTML from "../base/loadhtml.js";
 let container = document.querySelector('#container');
 let paginatorSection = document.querySelector('#pagination');
 
+
+loginClicked();
 // ============== EVENT LISTENER ==================
 document.addEventListener('DOMContentLoaded', () => {
     loadHTML("#navbar", '../base/navbar.html');
@@ -11,8 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
 // =========== FUNCTIONS ==========
 
 export function loadSongs(page) {
-    fetch(`http://127.0.0.1:8000/songs/?page=${page}`)
-        .then(response => response.json())
+    fetch(`http://127.0.0.1:8000/songs/?page=${page}`,{
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+        .then(response => {
+            
+            return response.json()})
         .then(data => {
             console.log(data);
             createPaginator(data);
@@ -28,7 +36,11 @@ export function loadSongs(page) {
                     window.location.href = `/song/song.html?${song.id}`;
                 });
             });
-        });
+        })
+        .catch((e)=>{
+            console.log('Error in Autherization')
+            window.location.href = `/user/login/index.html`;
+        })
 }
 
 function createCard(songId, imgSrc, songName) {
@@ -153,6 +165,26 @@ function getCurrentPage(response) {
 function saveNextPreviousIds(currentSongElement){
     localStorage.setItem('nextSong',currentSongElement.nextSibling.id)
     localStorage.setItem('prevSong',currentSongElement.perviousSibling.id)
+}
+
+
+function loginClicked() {
+    document.addEventListener('click', (event) => {
+        
+        // Check if the clicked element or its parent is the logout button
+        if (event.target.id === 'login' || event.target.closest('#login') ) {
+            setTimeout(() => {
+                window.location.href='/user/login/index.html'
+            }, 100);
+        }
+        if(event.target.id === 'logout' || event.target.closest('#logout'))
+        {
+            setTimeout(() => {
+                localStorage.clear()
+                window.location.href='/user/login/index.html'
+            }, 100); 
+        }
+    });
 }
 
 export default loadSongs;

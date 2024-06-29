@@ -6,6 +6,7 @@ let password = document.querySelector('.pass')
 let password2 = document.querySelector('.pass2')
 let signup = document.querySelector('#signup-btn')
 
+handleLogoutBtn();
 
 // ============= EVENT LISTENERS ====================
 // Add event listeners to inputs for validation
@@ -33,34 +34,44 @@ signup.addEventListener('click',()=>{
 
 // -------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
-    loadHTML('#navbar', '../../base/navbar.html');
+    loadHTML('#navbar', '../../base/navbar.html', updateUser, updateNav);
 });
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(()=>{
-        let logoutBtn = document.querySelector('#logout');
-        if(logoutBtn){
-            logoutBtn.addEventListener('click',()=>{
-                logout(localStorage);
-                logoutBtn.id='login'
-                logoutBtn.innerHTML='Login'
-            })
-        }
-    },200)
-    setTimeout(()=>{
-        let loginBtn = document.querySelector('#login');
-        if(loginBtn){
-            loginBtn.addEventListener('click',()=>{
-                window.location.href = '../login/index.html'; 
-            })
-        }
-    },200)
-});
-
 
 
 // ============= FUNCTIONS ====================
+
+function listenerLoginLogout(){
+    let logoutBtn = document.querySelector('#logout');
+    console.log('logout btn clicked')
+    if(logoutBtn){
+        logoutBtn.addEventListener('click',()=>{
+            logout(localStorage);
+            logoutBtn.id='login'
+            logoutBtn.innerHTML='Login'
+        })
+    }
+
+    let loginBtn = document.querySelector('#login');
+    if(loginBtn){
+        loginBtn.addEventListener('click',()=>{
+            window.location.href = '/user/login/index.html'; 
+        })
+    }
+}
+
+function updateUser() {
+      const usernameElement = document.getElementById('username');
+      const user = localStorage.getItem('user');
+  
+      if (user) {
+        usernameElement.textContent = user; // Assuming userData has a username property
+        // usernameElement.href = '/user/profile.html'; // Update href to user's profile or another appropriate page
+      } else {
+        usernameElement.textContent = '';
+      }
+
+
+  }
 // -------------------------------------------------------
 function postData(data){
     fetch('http://127.0.0.1:8000/user/register/',{
@@ -84,17 +95,25 @@ function postData(data){
 
 // -------------------------------------------------------
 // Load HTML file
-function loadHTML(selector, file) {
+function loadHTML(selector, file, callback, updatenav) {
     fetch(file)
-        .then(response => response.text())
-        .then(data => {
-            document.querySelector(selector).innerHTML = data;
+      .then(response => response.text())
+      .then(data => {
+        document.querySelector(selector).innerHTML = data;
+        let loginLogoutBtn =  document.querySelector('.btn');
+        console.log(loginLogoutBtn)
+        if (callback) {
+          callback();
+        }
+        if(updatenav)
+        {
+            let loginNav = document.querySelector('#login')
             let user = localStorage.getItem('user')
-            let loginNav = document.querySelector('#login');
             updateNav(user, loginNav);
-        })
-        .catch(error => console.error('Error loading HTML:', error));
-}
+        }
+      })
+      .catch(error => console.error('Error loading HTML:', error));
+  }
 
 
 // -------------------------------------------------------
@@ -129,3 +148,15 @@ function validateInput(input){
 }
 // -------------------------------------------------------
 
+function handleLogoutBtn() {
+    document.addEventListener('click', (event) => {
+        console.log(event.target)
+        // Check if the clicked element or its parent is the logout button
+        if (event.target.id === 'logout' || event.target.closest('#logout')) {
+            logout(localStorage);
+            setTimeout(() => {
+                window.location.reload();
+            }, 100); // Delay of 100 milliseconds
+        }
+    });
+}

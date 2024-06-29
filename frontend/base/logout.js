@@ -2,7 +2,6 @@ export function logout(localStorage){
     console.log('logout refresh token :',localStorage.getItem('refreshToken'))
     console.log('logout access token :',localStorage.getItem('accessToken'))
     logoutRequest(localStorage)
-    
 }
 
 // THIS METHOD WILL POST THE DATA TO LOGIN API ENDPOINT

@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status 
 from .serializers import UserSerializer
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.contrib.auth import authenticate
 from .tokens import get_tokens_for_user, expired_tokens
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -29,7 +29,7 @@ class LoginView(APIView):
         return Response(tokens, status=status.HTTP_202_ACCEPTED)
     
 class LogoutView(APIView):
-    permission_classes = (IsAuthenticated,)  # Uncomment this if you want to re-enable the permission
+    permission_classes = [AllowAny]  # Uncomment this if you want to re-enable the permission
 
     def post(self, request):
         refresh_token = request.data.get("refresh")

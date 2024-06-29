@@ -1,6 +1,7 @@
 import updateNav from "../../base/functions.js"
 import logout from "../../base/logout.js"
 
+
 let email = document.querySelector('.email')
 let password = document.querySelector('.pass')
 let loginBtn = document.querySelector('#login-btn')
@@ -9,7 +10,10 @@ let loginNav;
 
 //============ FUNCTION CALLED ===========
 
+
 handleLogoutBtn();
+
+
 //=========== EVENT LISTENERS ============
 // Add event listeners to inputs for validation
 email.addEventListener('focusout', () => validateInput(email));
@@ -41,23 +45,21 @@ loginBtn.addEventListener('click',()=>{
 
 // ========= FUNCTIONS ================
 // CREATE EVENT LISTENER FOR LOGOUT
-function handleLogoutBtn(){
-    document.addEventListener('DOMContentLoaded', () => {
-        setTimeout(()=>{
-            let logoutBtn = document.querySelector('#logout');
-            if(logoutBtn){
-                logoutBtn.addEventListener('click',()=>{
-                    logout(localStorage);
-                    logoutBtn.id='login'
-                    logoutBtn.innerHTML='Login'
-                })
-            }
-        },200)
+function handleLogoutBtn() {
+    document.addEventListener('click', (event) => {
+        console.log(event.target)
+        // Check if the clicked element or its parent is the logout button
+        if (event.target.id === 'logout' || event.target.closest('#logout')) {
+            logout(localStorage);
+            setTimeout(() => {
+                window.location.reload();
+            }, 100); // Delay of 100 milliseconds
+        }
     });
 }
 
 // LOAD THE NAVBAR USING JS
-function loadHTML(selector, file){
+function loadHTML(selector, file, callback){
     fetch(file)
     .then(response => response.text())
     .then(data => {
@@ -65,13 +67,16 @@ function loadHTML(selector, file){
         loginNav = document.querySelector('#login')
         let user = localStorage.getItem('user')
         updateNav(user, loginNav);
+        if (callback){
+            callback();
+        }
     })
     .catch(error => console.error('Error loading HTML:', error))
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('page loaded')
-    loadHTML('#navbar', '../../base/navbar.html');
+    loadHTML('#navbar', '../../base/navbar.html', updateUser);
 
 });
 
@@ -127,4 +132,19 @@ function resetInput(input){
     input = input.parentElement
     input.classList.remove('input-error');
     input.classList.remove('input-valid');
+}
+
+
+function updateUser() {
+    const usernameElement = document.getElementById('username');
+    const user = localStorage.getItem('user');
+
+    if (user) {
+      usernameElement.textContent = user; // Assuming userData has a username property
+      // usernameElement.href = '/user/profile.html'; // Update href to user's profile or another appropriate page
+    } else {
+      usernameElement.textContent = '';
+    }
+
+
 }

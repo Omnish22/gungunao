@@ -108,7 +108,7 @@ function login(data, email_value){
         resetInput(password)
         loginNav.id='logout'
         loginNav.innerHTML = 'Logout'
-        window.location.href = './index.html'; 
+        window.location.href = '/home/home.html'; 
         return data;
     })
     .catch((e)=>{console.log('error', e)});

@@ -28,17 +28,6 @@ backPage.addEventListener('click',()=>{
     window.location.href = "/home/home.html";
 })
 
-// playNextBtn.addEventListener('click', ()=>{
-//     let nextSongId = localStorage.getItem('nextSong')
-//     console.log('next song')
-//     console.log(nextSongId)
-//     let song = localStorage.getItem(nextSongId)
-//     localStorage.setItem('song', JSON.stringify(song))
-//     window.location.href = `/song/song.html?${nextSongId}`
-// })
-// playPrevBtn.addEventListener('click', ()=>{
-//     window.location.href = `/song/song.html?${localStorage.getItem('prevSong')}`
-// })
 
 playpause.addEventListener('click',()=>{ 
     console.log(play)
